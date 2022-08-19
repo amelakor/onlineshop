@@ -30,7 +30,7 @@ export const listProducts = () => async dispatch => {
   }
 };
 
-export const productDetails = id => async dispatch => {
+export const getProductDetails = id => async dispatch => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
