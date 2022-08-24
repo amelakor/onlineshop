@@ -11,7 +11,6 @@ import { useSearchParams } from 'react-router-dom';
 const LoginScreen = () => {
   const [searchParams] = useSearchParams();
   let navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');

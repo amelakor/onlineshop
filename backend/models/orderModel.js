@@ -27,7 +27,7 @@ const orderSchema = mongoose.Schema(
         },
         product: {
           type: mongoose.Schema.Types.ObjectId,
-          required: true,
+          //required: true,
           ref: 'Product',
         },
       },
@@ -67,6 +67,11 @@ const orderSchema = mongoose.Schema(
       email_address: {
         type: String,
       },
+    },
+    itemsPrice: {
+      type: Number,
+      required: true,
+      default: 0.0,
     },
     taxPrice: {
       type: Number,
