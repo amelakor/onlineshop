@@ -22,7 +22,6 @@ export const authUser = asyncHandler(async (req, res) => {
 
 export const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
-  console.log(req.user);
 
   if (user) {
     res.json({
@@ -38,7 +37,6 @@ export const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 export const updateUserProfile = asyncHandler(async (req, res) => {
-  console.log(req.user);
   const user = await User.findById(req.user._id);
 
   if (user) {
