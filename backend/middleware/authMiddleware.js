@@ -19,10 +19,15 @@ export const protect = asyncHandler(async (req, res, next) => {
     }
   }
 
-  //   if (!token) {
-  //     res.status(401);
-  //     throw new Error('Not Authorized');
-  //   }
-
   next();
 });
+
+export const isAdmin = (req, res, next) => {
+  console.log(req.user);
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error('Only admin can see users');
+  }
+};

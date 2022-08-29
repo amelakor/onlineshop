@@ -88,3 +88,57 @@ export const registerUser = asyncHandler(async (req, res) => {
     }
   }
 });
+
+export const getUsersbyAdmin = asyncHandler(async (req, res) => {
+  const users = await User.find();
+
+  if (users) {
+    res.json(users);
+  } else {
+    res.status(404);
+    throw new Error('There is no users');
+  }
+});
+
+export const getUserbyId = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select('-password');
+
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
+
+export const deleteUserByAdmin = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+
+  if (user) {
+    res.json({});
+  } else {
+    res.status(404);
+    throw new Error('There is no user.');
+  }
+});
+
+export const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = req.body.isAdmin;
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
