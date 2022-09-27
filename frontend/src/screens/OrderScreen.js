@@ -61,20 +61,29 @@ const OrderScreen = () => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
-              <p>
-                <strong>Name:</strong> {order.user.name}
-              </p>
-              <p>
-                <strong>Email:</strong>
-                <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
-              </p>
+              {order.user ? (
+                <>
+                  <p>
+                    <strong>Name:</strong> {order.user.name}
+                  </p>
+                  <p>
+                    <strong>Email:</strong>
+                    <a href={`mailto:${order.user.email}`}>
+                      {order.user.email}
+                    </a>
+                  </p>
 
-              <p>
-                <strong>Address: </strong>
-                {order.shippingAddress.address}, {order.shippingAddress.city},{' '}
-                {order.shippingAddress.postalCode},{' '}
-                {order.shippingAddress.country}
-              </p>
+                  <p>
+                    <strong>Address: </strong>
+                    {order.shippingAddress.address},{' '}
+                    {order.shippingAddress.city},{' '}
+                    {order.shippingAddress.postalCode},{' '}
+                    {order.shippingAddress.country}
+                  </p>
+                </>
+              ) : (
+                'User is not active'
+              )}
               {order.isDeliverd ? (
                 <Message variant="success">
                   Delivered on {order.deliveredAt}
