@@ -1,5 +1,6 @@
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/navDropdown';
@@ -8,11 +9,13 @@ import { logout } from '../actions/userActions';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
   const logoutHandler = () => {
     dispatch(logout());
+    navigate('/login');
   };
   return (
     <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
